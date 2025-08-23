@@ -1,0 +1,65 @@
+# Node dependencies
+node_modules/
+
+# Environment variables
+.env
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.pid.lock
+
+# Build outputs
+dist/
+build/
+.tmp/
+temp/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor/IDE settings
+.vscode/
+.idea/
+
+# Coverage directories
+coverage/
+.nyc_output/
+*.lcov
+
+# TypeScript
+*.tsbuildinfo
+
+# Optional npm/yarn/pnpm files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Test artifacts
+jest-test-results.json
+test-output/
+
+# Debugger settings
+node-inspect.json
+
+# Misc
+*.swp
+*.swo
+*.bak
+*.orig
+
+
+
+
+
+dist/
+*.tsbuildinfo
