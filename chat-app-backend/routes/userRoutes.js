@@ -3,7 +3,7 @@ const { getUsers, searchUsers, updateUserProfile } = require('../controllers/use
 const { protect } = require('../middleware/authMiddleware.js');
 const router = express.Router();
 
-router.route('/profile').put(protect, updateUserProfile); // 👈 Add this new profile update route
+router.route('/profile').put(protect, updateUserProfile); 
 router.route('/search').get(protect, searchUsers);
 router.route('/').get(protect, getUsers);
 

@@ -75,8 +75,8 @@ const getUsers = async (req, res) => {
           isOnline: 1,
           lastSeen: 1,
           unreadCount: { $ifNull: ['$unreadInfo.unreadCount', 0] },
-          lastMessage: { $ifNull: ['$lastMessage.message', ''] }, // Optional: include last message text
-          lastMessageTimestamp: { $ifNull: ['$lastMessage.createdAt', null] } // Optional: include timestamp
+          lastMessage: { $ifNull: ['$lastMessage.message', ''] }, //include last message text
+          lastMessageTimestamp: { $ifNull: ['$lastMessage.createdAt', null] } // include timestamp
         }
       }
     ]);

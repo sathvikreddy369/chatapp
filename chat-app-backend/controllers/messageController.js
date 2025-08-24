@@ -31,7 +31,7 @@ const getMessages = async (req, res) => {
 
 const sendMessage = async (req, res) => {
   try {
-    const senderId = req.user._id; // from auth middleware
+    const senderId = req.user._id;
     const { receiverId, content } = req.body;
 
     if (!receiverId || !content) {
