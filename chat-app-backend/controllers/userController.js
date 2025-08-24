@@ -127,6 +127,7 @@ const updateUserProfile = async (req, res) => {
         _id: updatedUser._id,
         username: updatedUser.username,
         email: updatedUser.email,
+        createdAt: updatedUser.createdAt, 
       });
     } else {
       res.status(404).json({ message: 'User not found' });
