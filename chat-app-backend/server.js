@@ -177,6 +177,25 @@ io.on('connection', (socket) => {
     io.emit('typing:global', { senderId: userId, receiverId: receiverId, isTyping: false });
   });
 
+  // socket.on('message:send', async (data) => {
+  //   try {
+  //     const { senderId, receiverId, message } = data;
+  //     const newMessage = new Message({ senderId, receiverId, message });
+  //     const receiverSocketId = userSocketMap[receiverId];
+      
+  //     if (receiverSocketId) {
+  //       newMessage.status = 'delivered';
+  //     }
+  //     await newMessage.save();
+
+  //     if (receiverSocketId) {
+  //       io.to(receiverSocketId).emit('message:new', newMessage);
+  //     }
+  //     socket.emit('message:new', newMessage);
+  //   } catch (error) {
+  //     console.error('Error in message:send event:', error);
+  //   }
+  // });
   socket.on('message:send', async (data) => {
     try {
       const { senderId, receiverId, message } = data;
@@ -188,10 +207,31 @@ io.on('connection', (socket) => {
       }
       await newMessage.save();
 
+      // Notify the receiver's chat screen if it's open
       if (receiverSocketId) {
         io.to(receiverSocketId).emit('message:new', newMessage);
       }
+      
+      // Always send the message back to the sender
       socket.emit('message:new', newMessage);
+
+      // 👇 ADD THIS: Emit a preview event to both users' home screens
+      const senderSocketId = userSocketMap[senderId];
+      if (senderSocketId) {
+          io.to(senderSocketId).emit('new:message_preview', {
+              from: senderId,
+              to: receiverId,
+              message: newMessage,
+          });
+      }
+      if (receiverSocketId) {
+          io.to(receiverSocketId).emit('new:message_preview', {
+              from: senderId,
+              to: receiverId,
+              message: newMessage,
+          });
+      }
+
     } catch (error) {
       console.error('Error in message:send event:', error);
     }
